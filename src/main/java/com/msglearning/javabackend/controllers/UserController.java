@@ -8,6 +8,7 @@ import com.msglearning.javabackend.to.UserTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -64,5 +65,10 @@ public class UserController {
         }
         String profileImageStoragePlace = env.getProperty("profileimage.path");
         return imageService.read(profileImageStoragePlace +"\\"+imageNameOpt.get());
+    }
+
+    @PostMapping("/newUser")
+    public User newUser(@RequestBody User user) {
+        return userService.save(user);
     }
 }

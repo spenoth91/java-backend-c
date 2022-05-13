@@ -17,5 +17,7 @@ public class UserTO implements Serializable {
 
     private String email;
 
+    private byte[] hashedPWD;
+
     private String phone;
 }
