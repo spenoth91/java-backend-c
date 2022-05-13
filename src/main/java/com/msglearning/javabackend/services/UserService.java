@@ -2,6 +2,7 @@ package com.msglearning.javabackend.services;
 
 import com.msglearning.javabackend.converters.UserConverter;
 import com.msglearning.javabackend.entity.User;
+import com.msglearning.javabackend.exceptions.InvalidUserException;
 import com.msglearning.javabackend.repositories.UserRepository;
 import com.msglearning.javabackend.to.UserTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,25 @@ public class UserService {
         //check firstname NotNull or empty
         //check lastName NotNull or empty
 
-        return userRepository.save(user);
+        if (validateUser(user))
+            return userRepository.save(user);
+        else
+            throw new InvalidUserException("Invalid User data");
     }
 
     public static boolean validateUser (User user) {
+        if (user.getEmail() == null || !user.getEmail().matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$"))
+            return false;
+
+        if (user.getFirstName() == null || user.getLastName() == null)
+            return false;
+
+        if (!user.getPhone().matches("^(\\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\\s|\\.|\\-)?([0-9]{3}(\\s|\\.|\\-|)){2}$"))
+            return false;
+
+        if (user.getPassword() == null)
+            return false;
+
         return true;
     }
 
