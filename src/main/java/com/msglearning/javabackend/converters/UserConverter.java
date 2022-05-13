@@ -19,4 +19,17 @@ public class UserConverter {
         );
     }
 
+    public static final User convertToUser (UserTO userTO) {
+        User user = new User();
+
+        user.setId(userTO.getId());
+        user.setPassword("empty");
+        user.setFirstName(userTO.getFirstName());
+        user.setLastName(userTO.getLastName());
+        user.setEmail(userTO.getEmail());
+        user.setPhone(user.getPhone());
+        user.setProfileImage("");
+
+        return user;
+    }
 }
