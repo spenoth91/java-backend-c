@@ -15,7 +15,7 @@ public class Person {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "emp_id", unique = true) // nullable = true (default)
+    @Column(name = "emp_id") // nullable = true (default)
     private Long employeeID;
 
     @Column(nullable = false)

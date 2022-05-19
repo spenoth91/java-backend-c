@@ -1,7 +1,12 @@
 package com.msglearning.javabackend.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.msglearning.javabackend.entity.Person;
+import com.msglearning.javabackend.services.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping({ ControllerConstants.API_PATH_PERSON })
@@ -11,5 +16,21 @@ public class PersonController {
     private static final String PATH_ID = "/id/{id}";
     private static final String PATH_NEW = "/new";
 
+    @Autowired
+    PersonService personService;
 
+    @GetMapping(PATH_ALL)
+    public List<Person> getAll() {
+        return personService.findAll();
+    }
+
+    @GetMapping(PATH_ID)
+    public Optional<Person> getById(@PathVariable Long id) {
+        return personService.findById(id);
+    }
+
+    @PostMapping(PATH_NEW)
+    public Person newPerson (@RequestBody Person person) {
+        return personService.save(person);
+    }
 }
