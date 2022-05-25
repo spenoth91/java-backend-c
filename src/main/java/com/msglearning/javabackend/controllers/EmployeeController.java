@@ -17,7 +17,7 @@ public class EmployeeController {
     private static final String PATH_NEW = "/new";
     private static final String PATH_TEAM_LEADER_ID = "/team-leader-id/{id}";
     private static final String PATH_DEPARTMENT = "/department/{department}";
-    private static final String PATH_UPDATE = "/update/{department}";
+    private static final String PATH_UPDATE = "/update/{id}";
 
     @Autowired
     EmployeeService employeeService;
