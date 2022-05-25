@@ -31,4 +31,22 @@ public class PersonService {
     public Optional<Person> findById(Long id) {
         return personRepository.findById(id);
     }
+
+    public Optional<Person> updateData(Long id, Person personDetails) {
+        Optional<Person> personOpt = personRepository.findById(id);
+        if (personOpt.isEmpty())
+            return Optional.empty();
+
+        Person person = personOpt.get();
+
+        // shouldn't be able to set the person id
+        person.setFullName  (personDetails.getFullName());
+        person.setPassword  (personDetails.getPassword());
+        person.setAddress   (personDetails.getAddress());
+        person.setEmail     (personDetails.getEmail());
+        person.setPhone     (personDetails.getPhone());
+        person.setEmployeeID(personDetails.getEmployeeID());
+
+        return Optional.of(person);
+    }
 }

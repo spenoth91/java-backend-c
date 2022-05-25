@@ -17,6 +17,7 @@ public class EmployeeController {
     private static final String PATH_NEW = "/new";
     private static final String PATH_TEAM_LEADER_ID = "/team-leader-id/{id}";
     private static final String PATH_DEPARTMENT = "/department/{department}";
+    private static final String PATH_UPDATE = "/update/{department}";
 
     @Autowired
     EmployeeService employeeService;
@@ -41,7 +42,13 @@ public class EmployeeController {
         return employeeService.getByTeamLeaderID(id);
     }
 
+    @GetMapping(PATH_DEPARTMENT)
     public List<Employee> getByDepartment(@PathVariable String department) {
         return employeeService.getByDepartment(department);
+    }
+
+    @PutMapping(PATH_UPDATE)
+    public Optional<Employee> updateData(@PathVariable Long id, @RequestBody Employee employeeDetails) {
+        return employeeService.updateData(id, employeeDetails);
     }
 }

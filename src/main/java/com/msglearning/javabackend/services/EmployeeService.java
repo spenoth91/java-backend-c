@@ -46,4 +46,21 @@ public class EmployeeService {
                 .filter(e -> e.getDepartment().equals(department))
                 .collect(Collectors.toList());
     }
+
+    public Optional<Employee> updateData(Long id, Employee employeeDetails) {
+        Optional<Employee> employeeOpt = employeeRepository.findById(id);
+        if (employeeOpt.isEmpty())
+            return Optional.empty();
+
+        Employee employee = employeeOpt.get();
+
+        // shouldn't be able to set the employee id
+        employee.setPersonID    (employeeDetails.getPersonID());
+        employee.setDepartment  (employeeDetails.getDepartment());
+        employee.setSalary      (employeeDetails.getSalary());
+        employee.setTeamLeader  (employeeDetails.isTeamLeader());
+        employee.setTeamLeaderID(employeeDetails.getTeamLeaderID());
+
+        return Optional.of(employee);
+    }
 }
