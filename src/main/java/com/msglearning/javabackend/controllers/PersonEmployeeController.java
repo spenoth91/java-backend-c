@@ -4,6 +4,7 @@ import com.msglearning.javabackend.converters.Helper;
 import com.msglearning.javabackend.entity.Employee;
 import com.msglearning.javabackend.entity.Person;
 import com.msglearning.javabackend.services.EmployeeService;
+import com.msglearning.javabackend.services.PersonEmployeeService;
 import com.msglearning.javabackend.services.PersonService;
 import com.msglearning.javabackend.to.PersonEmployeeTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +23,17 @@ public class PersonEmployeeController {
     private static final String PATH_EMPLOYEE_ID = "/employee-id/{id}";
 
     @Autowired
-    PersonService personService;
-
-    @Autowired
-    EmployeeService employeeService;
+    PersonEmployeeService service;
 
     @GetMapping(PATH_PERSON_ID)
     public PersonEmployeeTO getByPersonId(@PathVariable Long id) {
-        Optional<Person> person = personService.findById(id);
-        if (person.isEmpty())
-            return null;
-
-        Optional<Employee> employee = employeeService.findById(id);
-        if (employee.isEmpty())
-            return null;
-
-        return Helper.convertToPersonEmployeeTO(person.get(), employee.get());
+        return service.getByPersonId(id);
     }
+
+    @GetMapping(PATH_EMPLOYEE_ID)
+    public PersonEmployeeTO getByEmployeeId(@PathVariable Long id) {
+        return service.getByEmployeeId(id);
+    }
+
+
 }
