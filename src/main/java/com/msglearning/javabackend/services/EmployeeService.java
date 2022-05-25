@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -30,5 +31,19 @@ public class EmployeeService {
 
     public Optional<Employee> findById(Long id) {
         return employeeRepository.findById(id);
+    }
+
+    public List<Employee> getByTeamLeaderID(Long id) {
+        return employeeRepository.findAll()
+                .stream()
+                .filter(e -> e.getId().equals(id) || e.getTeamLeaderID().equals(id))
+                .collect(Collectors.toList());
+    }
+
+    public List<Employee> getByDepartment(String department) {
+        return employeeRepository.findAll()
+                .stream()
+                .filter(e -> e.getDepartment().equals(department))
+                .collect(Collectors.toList());
     }
 }
