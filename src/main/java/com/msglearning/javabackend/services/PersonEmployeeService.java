@@ -8,7 +8,6 @@ import com.msglearning.javabackend.repositories.PersonRepository;
 import com.msglearning.javabackend.to.PersonEmployeeTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
@@ -21,8 +20,7 @@ public class PersonEmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-
-    public PersonEmployeeTO getByPersonId(@PathVariable Long id) {
+    public PersonEmployeeTO getByPersonId(Long id) {
         Optional<Person> person = personRepository.findById(id);
         if (person.isEmpty())
             return null;
@@ -34,7 +32,7 @@ public class PersonEmployeeService {
         return Helper.convertToPersonEmployeeTO(person.get(), employee.get());
     }
 
-    public PersonEmployeeTO getByEmployeeId(@PathVariable Long id) {
+    public PersonEmployeeTO getByEmployeeId(Long id) {
         Optional<Employee> employee = employeeRepository.findById(id);
         if (employee.isEmpty())
             return null;

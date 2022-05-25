@@ -1,19 +1,13 @@
 package com.msglearning.javabackend.controllers;
 
-import com.msglearning.javabackend.converters.Helper;
-import com.msglearning.javabackend.entity.Employee;
-import com.msglearning.javabackend.entity.Person;
-import com.msglearning.javabackend.services.EmployeeService;
 import com.msglearning.javabackend.services.PersonEmployeeService;
-import com.msglearning.javabackend.services.PersonService;
 import com.msglearning.javabackend.to.PersonEmployeeTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping({ ControllerConstants.API_PATH_PERSON_EMPLOYEE })
@@ -34,6 +28,4 @@ public class PersonEmployeeController {
     public PersonEmployeeTO getByEmployeeId(@PathVariable Long id) {
         return service.getByEmployeeId(id);
     }
-
-
 }
