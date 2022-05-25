@@ -15,6 +15,7 @@ public class PersonController {
     private static final String PATH_ALL = "/all";
     private static final String PATH_ID = "/id/{id}";
     private static final String PATH_NEW = "/new";
+    private static final String PATH_UPDATE = "/update/{id}";
 
     @Autowired
     PersonService personService;
@@ -32,5 +33,10 @@ public class PersonController {
     @PostMapping(PATH_NEW)
     public Person newPerson (@RequestBody Person person) {
         return personService.save(person);
+    }
+
+    @PutMapping(PATH_UPDATE)
+    public Optional<Person> updateData (@PathVariable Long id, @RequestBody Person personDetails) {
+        return personService.updateData(id, personDetails);
     }
 }
