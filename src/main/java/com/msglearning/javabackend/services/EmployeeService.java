@@ -2,6 +2,7 @@ package com.msglearning.javabackend.services;
 
 import com.msglearning.javabackend.entity.Employee;
 import com.msglearning.javabackend.repositories.EmployeeRepository;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,5 +63,13 @@ public class EmployeeService {
         employee.setTeamLeaderID(employeeDetails.getTeamLeaderID());
 
         return Optional.of(employee);
+    }
+
+    public void deleteEmployee(Long id) throws ServiceException {
+        employeeRepository.deleteById(id);
+    }
+
+    public void deleteAll(List<Employee> ids) {
+        employeeRepository.deleteAll(ids);
     }
 }

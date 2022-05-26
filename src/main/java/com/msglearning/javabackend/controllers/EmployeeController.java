@@ -2,11 +2,16 @@ package com.msglearning.javabackend.controllers;
 
 import com.msglearning.javabackend.entity.Employee;
 import com.msglearning.javabackend.services.EmployeeService;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.msglearning.javabackend.controllers.MyResponseEntity.buildErrorMessage;
+import static com.msglearning.javabackend.controllers.MyResponseEntity.buildSuccessMessage;
 
 @RestController
 @RequestMapping({ ControllerConstants.API_PATH_EMPLOYEE })
@@ -18,6 +23,9 @@ public class EmployeeController {
     private static final String PATH_TEAM_LEADER_ID = "/team-leader-id/{id}";
     private static final String PATH_DEPARTMENT = "/department/{department}";
     private static final String PATH_UPDATE = "/update/{id}";
+    private static final String PATH_DELETE = "/delete/{id}";
+    private static final String PATH_DELETE_ALL = "/deleteall";
+
 
     @Autowired
     EmployeeService employeeService;
@@ -50,5 +58,30 @@ public class EmployeeController {
     @PutMapping(PATH_UPDATE)
     public Optional<Employee> updateData(@PathVariable Long id, @RequestBody Employee employeeDetails) {
         return employeeService.updateData(id, employeeDetails);
+    }
+
+    @DeleteMapping(PATH_DELETE)
+    public MyResponseEntity<?> deleteEmployee(@PathVariable Long id) {
+        try{
+            employeeService.deleteEmployee(id);
+            return buildSuccessMessage();
+
+        }catch(ServiceException e){
+            return buildErrorMessage(e.getMessage());
+        }
+    }
+
+    @DeleteMapping(PATH_DELETE_ALL)
+    public MyResponseEntity<?> deleteAllEmployees(@RequestBody List<Employee> ids) {
+        if (!ids.isEmpty()) {
+            try {
+                employeeService.deleteAll(ids);
+                return buildSuccessMessage("Fired all employees");
+
+            } catch (ServiceException e) {
+                return buildErrorMessage(e.getMessage());
+            }
+        }
+        return buildErrorMessage("There is no Employee in your list");
     }
 }
