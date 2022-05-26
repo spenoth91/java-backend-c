@@ -9,7 +9,7 @@ Person Controller: /person
 - [x] GET: /id/{id}
 - [x] POST: /new + body
 - [x] PUT: /update/{id} + body
-- [ ] DELETE: /delete/{id}
+- [] DELETE: /delete/{id}
 
 Body example:
 ````
@@ -32,7 +32,8 @@ Employee Controller: /employee
  - [x] GET: /department/{department}
  - [x] POST: /new + body
  - [x] PUT: /update/{id} + body
- - [ ] DELETE: /delete/{id}
+ - [x] DELETE: /delete/{id}
+ - [x] DELETE: /deleteall
 
 Body example:
 ````
