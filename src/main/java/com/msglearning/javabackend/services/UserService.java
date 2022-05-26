@@ -5,6 +5,7 @@ import com.msglearning.javabackend.entity.User;
 import com.msglearning.javabackend.exceptions.InvalidUserException;
 import com.msglearning.javabackend.repositories.UserRepository;
 import com.msglearning.javabackend.to.UserTO;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -95,5 +96,6 @@ public class UserService {
     public Optional<String> getProfileImage(Long userId) {
         return userRepository.findProfileImageById(userId);
     }
+
 
 }

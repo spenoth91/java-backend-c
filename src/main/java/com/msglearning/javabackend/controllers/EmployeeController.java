@@ -1,7 +1,10 @@
 package com.msglearning.javabackend.controllers;
 
 import com.msglearning.javabackend.entity.Employee;
+import com.msglearning.javabackend.repositories.EmployeeRepository;
 import com.msglearning.javabackend.services.EmployeeService;
+import com.msglearning.javabackend.services.PersonService;
+import com.msglearning.javabackend.services.UserService;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +32,7 @@ public class EmployeeController {
 
     @Autowired
     EmployeeService employeeService;
+    PersonService personService;
 
     @GetMapping(PATH_ALL)
     public List<Employee> getAll() {
@@ -63,6 +67,7 @@ public class EmployeeController {
     @DeleteMapping(PATH_DELETE)
     public MyResponseEntity<?> deleteEmployee(@PathVariable Long id) {
         try{
+            personService.deletePerson(employeeService.findByPi(id));
             employeeService.deleteEmployee(id);
             return buildSuccessMessage();
 

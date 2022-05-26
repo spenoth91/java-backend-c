@@ -15,7 +15,9 @@ public class Employee {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "person_id")
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "person_id", referencedColumnName = "emp_id")
+    @Column(name="person_id")
     private Long personID;
 
     @Column(name = "team_leader_id")

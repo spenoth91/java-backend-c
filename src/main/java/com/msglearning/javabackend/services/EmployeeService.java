@@ -4,6 +4,7 @@ import com.msglearning.javabackend.entity.Employee;
 import com.msglearning.javabackend.repositories.EmployeeRepository;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -69,6 +70,9 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
+    public Long findByPi(Long id){
+        return employeeRepository.findByPersonId(id);
+    }
     public void deleteAll(List<Employee> ids) {
         employeeRepository.deleteAll(ids);
     }
