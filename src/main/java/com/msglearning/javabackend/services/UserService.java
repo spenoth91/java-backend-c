@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -20,15 +21,15 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User save(User user) {
+    public User save(UserTO userTO) {
 
         //validate Phone
         //validate email
         //check firstname NotNull or empty
         //check lastName NotNull or empty
 
-        if (validateUser(user))
-            return userRepository.save(user);
+        if (validateUserTO(userTO))
+            return userRepository.save(UserConverter.convertToEntity(userTO));
         else
             throw new InvalidUserException("Invalid User data");
     }
@@ -59,8 +60,8 @@ public class UserService {
         if (!userTO.getPhone().matches("^(\\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\\s|\\.|\\-)?([0-9]{3}(\\s|\\.|\\-|)){2}$"))
             return false;
 
-        if (userTO.getHashedPWD() == null)
-            return false;
+        //if (userTO.getHashedPWD() == null)
+            //return false;
 
         return true;
     }
@@ -97,5 +98,39 @@ public class UserService {
         return userRepository.findProfileImageById(userId);
     }
 
+    public List<User> getGmailUsers() {
+        List<User> allUsers = userRepository.findAll();
+
+        return allUsers.stream()
+                .filter(u -> u.getEmail().endsWith("gmail.com"))
+                .collect(Collectors.toList());
+
+    }
+
+    public List<String> getNamesSorted() {
+        List<User> allUsers = userRepository.findAll();
+
+        return allUsers.stream()
+                .map(u->u.getFirstName() + " " + u.getLastName())
+                .sorted()
+                .collect(Collectors.toList());
+
+    }
+
+    public boolean existsWithName(String name) {
+        List<User> allUsers = userRepository.findAll();
+
+        return allUsers.stream()
+                .anyMatch(u-> u.getFirstName().contains(name) || u.getLastName().contains(name) );
+
+    }
+
+    public Map<String, List<User>> groupByOccupation () {
+        List<User> allUsers = userRepository.findAll();
+
+        Map<String, List<User>> toReturn = allUsers.
+                stream().collect(Collectors.groupingBy(User::getOccupation));
+        return toReturn;
+    }
 
 }

@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class UserConverter {
 
-    public static final UserTO convertToTO(User entity) {
+   /* public static final UserTO convertToTO(User entity) {
         return new UserTO(
                 entity.getId(),
                 entity.getFirstName(),
@@ -17,8 +17,12 @@ public class UserConverter {
                 PasswordService.hash(entity.getPassword()),
                 entity.getPhone()
         );
-    }
+    }*/
 
+    public static final UserTO convertToTO(User entity) {
+        return new UserTO(entity.getId(), entity.getPassword(), entity.getFirstName(),
+                entity.getLastName(), entity.getEmail(), entity.getPhone(), entity.getOccupation());
+    }
     public static final User convertToUser (UserTO userTO) {
         User user = new User();
 
@@ -31,5 +35,10 @@ public class UserConverter {
         user.setProfileImage("");
 
         return user;
+    }
+
+    public static final User convertToEntity(UserTO to) {
+        return new User(to.getId(), to.getPassword(), to.getFirstName(), to.getLastName(), to.getEmail(), to.getPhone(), null, to.getOccupation(), null
+        );
     }
 }

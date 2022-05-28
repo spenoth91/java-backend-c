@@ -8,4 +8,7 @@ public class ControllerConstants {
     public static final String API_PATH_EMPLOYEE = API_PATH + "/employee";
     public static final String API_PATH_PERSON_EMPLOYEE = API_PATH + "/person-employee";
 
+    public static final String API_PATH_AUTH = API_PATH + "/auth";
+
+
 }
