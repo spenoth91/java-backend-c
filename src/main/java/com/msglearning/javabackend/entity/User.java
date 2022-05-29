@@ -1,20 +1,23 @@
 package com.msglearning.javabackend.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Table(name = User.TABLE_NAME)
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     static final String TABLE_NAME = "user";
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -36,5 +39,11 @@ public class User {
 
     @Column
     private String profileImage;
+
+    @Column
+    private String role;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Stuff> stuffList;
 
 }

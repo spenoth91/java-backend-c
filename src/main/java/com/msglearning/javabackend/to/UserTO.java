@@ -11,13 +11,17 @@ public class UserTO implements Serializable {
 
     private Long id;
 
+    private String password;
+
     private String firstName;
 
     private String lastName;
 
     private String email;
 
-    private byte[] hashedPWD;
+    //private byte[] hashedPWD;
 
     private String phone;
+
+    private String role;
 }
