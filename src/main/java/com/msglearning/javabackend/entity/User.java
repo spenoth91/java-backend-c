@@ -41,7 +41,7 @@ public class User {
     private String profileImage;
 
     @Column
-    private String occupation;
+    private String role;
 
     @OneToMany(mappedBy = "owner")
     private List<Stuff> stuffList;

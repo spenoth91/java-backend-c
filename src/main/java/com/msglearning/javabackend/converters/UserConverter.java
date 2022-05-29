@@ -21,7 +21,7 @@ public class UserConverter {
 
     public static final UserTO convertToTO(User entity) {
         return new UserTO(entity.getId(), entity.getPassword(), entity.getFirstName(),
-                entity.getLastName(), entity.getEmail(), entity.getPhone(), entity.getOccupation());
+                entity.getLastName(), entity.getEmail(), entity.getPhone(), entity.getRole());
     }
     public static final User convertToUser (UserTO userTO) {
         User user = new User();
@@ -38,7 +38,7 @@ public class UserConverter {
     }
 
     public static final User convertToEntity(UserTO to) {
-        return new User(to.getId(), to.getPassword(), to.getFirstName(), to.getLastName(), to.getEmail(), to.getPhone(), null, to.getOccupation(), null
+        return new User(to.getId(), to.getPassword(), to.getFirstName(), to.getLastName(), to.getEmail(), to.getPhone(), null, to.getRole(), null
         );
     }
 }

@@ -78,7 +78,7 @@ public class UserController {
     }
 
     @PostMapping("/newUser")
-    public User newUser(@RequestBody UserTO userTO) {
+    public User newUser(@RequestBody UserTO userTO) throws Exception {
         return userService.save(userTO);
     }
 

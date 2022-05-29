@@ -21,17 +21,17 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User save(UserTO userTO) {
+    public User save(UserTO userTO) throws Exception {
 
         //validate Phone
         //validate email
         //check firstname NotNull or empty
         //check lastName NotNull or empty
-
-        if (validateUserTO(userTO))
+        userTO.setPassword(PasswordService.getSaltedHash(userTO.getPassword()));
+        //if (validateUserTO(userTO))
             return userRepository.save(UserConverter.convertToEntity(userTO));
-        else
-            throw new InvalidUserException("Invalid User data");
+        //else
+            //throw new InvalidUserException("Invalid User data");
     }
 
     public static boolean validateUser (User user) {
@@ -125,11 +125,11 @@ public class UserService {
 
     }
 
-    public Map<String, List<User>> groupByOccupation () {
+    public Map<String, List<User>> groupByRole() {
         List<User> allUsers = userRepository.findAll();
 
         Map<String, List<User>> toReturn = allUsers.
-                stream().collect(Collectors.groupingBy(User::getOccupation));
+                stream().collect(Collectors.groupingBy(User::getRole));
         return toReturn;
     }
 
