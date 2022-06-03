@@ -15,10 +15,17 @@ public class Employee {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "person_id", referencedColumnName = "emp_id")
-    @Column(name="person_id")
-    private Long personID;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id")
+    private Person pers;
+
+    public Person getPerson() {
+        return pers;
+    }
+
+    public void setPerson(Person person) {
+        this.pers = person;
+    }
 
     @Column(name = "team_leader_id")
     private Long teamLeaderID;
@@ -26,9 +33,11 @@ public class Employee {
     @Column(name = "is_team_leader", nullable = false)
     private boolean isTeamLeader;
 
+
     @Column(nullable = false)
     private String department;
 
     @Column(nullable = false)
     private Long salary;
+
 }

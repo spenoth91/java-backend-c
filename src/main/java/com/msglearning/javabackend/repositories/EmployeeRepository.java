@@ -18,9 +18,9 @@ public interface EmployeeRepository extends CrudRepository <Employee, Long> {
 
     Optional<Employee> findById(Long id);
 
-    @Query("SELECT personID from Employee where id = :id")
+    /*@Query("SELECT personID from Employee where id = :id")
     Long findByPersonId(Long id);
 
-    //Optional<Employee> findByPersonID(Long id);
+    Optional<Employee> findByPersonID(Long id);*/
 
 }

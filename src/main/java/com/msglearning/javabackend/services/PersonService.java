@@ -44,11 +44,11 @@ public class PersonService {
 
         // shouldn't be able to set the person id
         person.setFullName  (personDetails.getFullName());
-        person.setPassword  (personDetails.getPassword());
+        person.setNationality  (personDetails.getNationality());
         person.setAddress   (personDetails.getAddress());
         person.setEmail     (personDetails.getEmail());
         person.setPhone     (personDetails.getPhone());
-        person.setEmployeeID(personDetails.getEmployeeID());
+        person.setEmployee(personDetails.getEmployee());
 
         return Optional.of(person);
     }

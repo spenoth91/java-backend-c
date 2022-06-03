@@ -13,9 +13,8 @@ public class PersonEmployeeTO implements Serializable {
     String address;
     String email;
     String phone;
+    String nationality;
 
-    Long employeeID;
-    Long teamLeaderID;
     Boolean isTeamLeader;
     String Department;
     Long salary;

@@ -15,13 +15,11 @@ public class Person {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "emp_id", referencedColumnName = "person_id")
-    @Column(name = "emp_id") // nullable = true (default)
-    private Long employeeID;
+    @OneToOne(mappedBy = "pers")
+    private Employee employee;
 
     @Column(nullable = false)
-    private String password;
+    private String nationality;
 
     @Column(name = "full_name", nullable = false)
     private String fullName;

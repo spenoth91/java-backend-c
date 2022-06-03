@@ -64,7 +64,7 @@ public class EmployeeController {
         return employeeService.updateData(id, employeeDetails);
     }
 
-    @DeleteMapping(PATH_DELETE)
+    /*@DeleteMapping(PATH_DELETE)
     public MyResponseEntity<?> deleteEmployee(@PathVariable Long id) {
         try{
             personService.deletePerson(employeeService.findByPi(id));
@@ -74,7 +74,7 @@ public class EmployeeController {
         }catch(ServiceException e){
             return buildErrorMessage(e.getMessage());
         }
-    }
+    }*/
 
     @DeleteMapping(PATH_DELETE_ALL)
     public MyResponseEntity<?> deleteAllEmployees(@RequestBody List<Employee> ids) {

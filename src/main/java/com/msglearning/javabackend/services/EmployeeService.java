@@ -57,7 +57,7 @@ public class EmployeeService {
         Employee employee = employeeOpt.get();
 
         // shouldn't be able to set the employee id
-        employee.setPersonID    (employeeDetails.getPersonID());
+        employee.setPerson    (employeeDetails.getPerson());
         employee.setDepartment  (employeeDetails.getDepartment());
         employee.setSalary      (employeeDetails.getSalary());
         employee.setTeamLeader  (employeeDetails.isTeamLeader());
@@ -70,9 +70,10 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    public Long findByPi(Long id){
+    /*public Long findByPi(Long id){
         return employeeRepository.findByPersonId(id);
-    }
+    }*/
+
     public void deleteAll(List<Employee> ids) {
         employeeRepository.deleteAll(ids);
     }

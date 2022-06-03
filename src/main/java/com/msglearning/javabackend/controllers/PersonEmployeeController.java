@@ -16,9 +16,11 @@ public class PersonEmployeeController {
     private static final String PATH_PERSON_ID = "/person-id/{id}";
     private static final String PATH_EMPLOYEE_ID = "/employee-id/{id}";
 
+
     @Autowired
     PersonEmployeeService service;
 
+/*
     @GetMapping(PATH_PERSON_ID)
     public PersonEmployeeTO getByPersonId(@PathVariable Long id) {
         return service.getByPersonId(id);
@@ -27,5 +29,5 @@ public class PersonEmployeeController {
     @GetMapping(PATH_EMPLOYEE_ID)
     public PersonEmployeeTO getByEmployeeId(@PathVariable Long id) {
         return service.getByEmployeeId(id);
-    }
+    }*/
 }

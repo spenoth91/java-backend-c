@@ -10,6 +10,6 @@ public interface PersonRepository extends CrudRepository <Person, Long> {
 
     List<Person> findAll();
 
-    @Query("SELECT p.id FROM Person p JOIN Employee e ON p.employeeID=e.personID WHERE p.employeeID=e.id")
-    Long findByEmployeeID();
+    /*@Query("SELECT p.id FROM Person p JOIN Employee e ON p.employeeID=e.personID WHERE p.employeeID=e.id")
+    Long findByEmployeeID();*/
 }
