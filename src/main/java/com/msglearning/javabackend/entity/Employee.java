@@ -1,5 +1,6 @@
 package com.msglearning.javabackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Employee {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     @JoinColumn(name = "person_id")
     private Person pers;
 

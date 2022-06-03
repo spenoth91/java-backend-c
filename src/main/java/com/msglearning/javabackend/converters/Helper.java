@@ -5,7 +5,7 @@ import com.msglearning.javabackend.entity.Person;
 import com.msglearning.javabackend.to.PersonEmployeeTO;
 
 public class Helper {
-    public static final PersonEmployeeTO convertToPersonEmployeeTO(Person person, Employee employee){
+    /*public static final PersonEmployeeTO convertToPersonEmployeeTO(Person person, Employee employee){
         return new PersonEmployeeTO(
                 person.getId(),
                 person.getFullName(),
@@ -18,5 +18,5 @@ public class Helper {
                 employee.getDepartment(),
                 employee.getSalary()
         );
-    }
+    }*/
 }

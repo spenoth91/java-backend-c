@@ -1,5 +1,6 @@
 package com.msglearning.javabackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Person {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonBackReference
     @OneToOne(mappedBy = "pers")
     private Employee employee;
 
