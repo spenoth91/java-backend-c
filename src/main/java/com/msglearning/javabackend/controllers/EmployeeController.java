@@ -5,6 +5,7 @@ import com.msglearning.javabackend.repositories.EmployeeRepository;
 import com.msglearning.javabackend.services.EmployeeService;
 import com.msglearning.javabackend.services.PersonService;
 import com.msglearning.javabackend.services.UserService;
+import com.msglearning.javabackend.to.PersonEmployeeTO;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import static com.msglearning.javabackend.controllers.MyResponseEntity.buildSucc
 public class EmployeeController {
 
     private static final String PATH_ALL = "/all";
+    private static final String PATH_ALL_BY_PERSON = "/all-emp-pers";
     private static final String PATH_ID = "/id/{id}";
     private static final String PATH_NEW = "/new";
     private static final String PATH_TEAM_LEADER_ID = "/team-leader-id/{id}";
@@ -64,7 +66,12 @@ public class EmployeeController {
         return employeeService.updateData(id, employeeDetails);
     }
 
-    @DeleteMapping(PATH_DELETE)
+    @GetMapping(PATH_ALL_BY_PERSON)
+    public List<PersonEmployeeTO>getAllEmployeesByPerson(){
+        List<PersonEmployeeTO>personEmployee = employeeService.getAllEmployeesByPerson();
+        return personEmployee;
+    }
+    /*@DeleteMapping(PATH_DELETE)
     public MyResponseEntity<?> deleteEmployee(@PathVariable Long id) {
         try{
             personService.deletePerson(employeeService.findByPi(id));
@@ -74,7 +81,7 @@ public class EmployeeController {
         }catch(ServiceException e){
             return buildErrorMessage(e.getMessage());
         }
-    }
+    }*/
 
     @DeleteMapping(PATH_DELETE_ALL)
     public MyResponseEntity<?> deleteAllEmployees(@RequestBody List<Employee> ids) {

@@ -20,7 +20,7 @@ public class PersonEmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public PersonEmployeeTO getByPersonId(Long id) {
+    /*public PersonEmployeeTO getByPersonId(Long id) {
         Optional<Person> person = personRepository.findById(id);
         if (person.isEmpty())
             return null;
@@ -42,5 +42,5 @@ public class PersonEmployeeService {
             return null;
 
         return Helper.convertToPersonEmployeeTO(person.get(), employee.get());
-    }
+    }*/
 }

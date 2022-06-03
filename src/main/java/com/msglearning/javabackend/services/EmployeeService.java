@@ -1,12 +1,15 @@
 package com.msglearning.javabackend.services;
 
 import com.msglearning.javabackend.entity.Employee;
+import com.msglearning.javabackend.entity.Person;
 import com.msglearning.javabackend.repositories.EmployeeRepository;
+import com.msglearning.javabackend.to.PersonEmployeeTO;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +38,7 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
+
     public List<Employee> getByTeamLeaderID(Long id) {
         return employeeRepository.findAll()
                 .stream()
@@ -57,7 +61,7 @@ public class EmployeeService {
         Employee employee = employeeOpt.get();
 
         // shouldn't be able to set the employee id
-        employee.setPersonID    (employeeDetails.getPersonID());
+        employee.setPerson    (employeeDetails.getPerson());
         employee.setDepartment  (employeeDetails.getDepartment());
         employee.setSalary      (employeeDetails.getSalary());
         employee.setTeamLeader  (employeeDetails.isTeamLeader());
@@ -70,9 +74,37 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    public Long findByPi(Long id){
-        return employeeRepository.findByPersonId(id);
+
+    public List<PersonEmployeeTO> getAllEmployeesByPerson(){
+        return((List<Employee>) employeeRepository
+                .findAll())
+                .stream()
+                .map(this::convertToEmployeePersonTO)
+                    .collect(Collectors.toList());
+
     }
+
+    private PersonEmployeeTO convertToEmployeePersonTO(Employee employee){
+        PersonEmployeeTO personEmployeeTO = new PersonEmployeeTO();
+        personEmployeeTO.setEmployeeID(employee.getId());
+        personEmployeeTO.setSalary(employee.getSalary());
+        personEmployeeTO.setTeamLeader(employee.isTeamLeader());
+        personEmployeeTO.setDepartment(employee.getDepartment());
+
+        Person person = employee.getPerson();
+        personEmployeeTO.setAddress(person.getAddress());
+        personEmployeeTO.setFullName(person.getFullName());
+        personEmployeeTO.setNationality(person.getNationality());
+        personEmployeeTO.setEmail(person.getEmail());
+        personEmployeeTO.setPhone(person.getPhone());
+
+        return personEmployeeTO;
+    }
+
+    /*public Long findByPi(Long id){
+        return employeeRepository.findByPersonId(id);
+    }*/
+
     public void deleteAll(List<Employee> ids) {
         employeeRepository.deleteAll(ids);
     }
