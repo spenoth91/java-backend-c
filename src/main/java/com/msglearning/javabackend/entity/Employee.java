@@ -19,15 +19,8 @@ public class Employee {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     @JoinColumn(name = "person_id")
-    private Person pers;
+    private Person person;
 
-    public Person getPerson() {
-        return pers;
-    }
-
-    public void setPerson(Person person) {
-        this.pers = person;
-    }
 
     @Column(name = "team_leader_id")
     private Long teamLeaderID;

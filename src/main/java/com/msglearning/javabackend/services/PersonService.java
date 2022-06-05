@@ -48,7 +48,7 @@ public class PersonService {
         person.setAddress   (personDetails.getAddress());
         person.setEmail     (personDetails.getEmail());
         person.setPhone     (personDetails.getPhone());
-        person.setEmployee(personDetails.getEmployee());
+        //person.setEmployee(personDetails.getEmployee());
 
         return Optional.of(person);
     }

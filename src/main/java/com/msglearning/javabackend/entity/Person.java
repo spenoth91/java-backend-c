@@ -16,9 +16,9 @@ public class Person {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonBackReference
-    @OneToOne(mappedBy = "pers")
-    private Employee employee;
+//    @JsonBackReference
+//    @OneToOne(mappedBy = "pers")
+//    private Employee employee;
 
     @Column(nullable = false)
     private String nationality;

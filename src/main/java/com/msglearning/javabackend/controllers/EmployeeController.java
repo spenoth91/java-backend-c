@@ -18,6 +18,7 @@ import java.util.Optional;
 import static com.msglearning.javabackend.controllers.MyResponseEntity.buildErrorMessage;
 import static com.msglearning.javabackend.controllers.MyResponseEntity.buildSuccessMessage;
 
+@CrossOrigin
 @RestController
 @RequestMapping({ ControllerConstants.API_PATH_EMPLOYEE })
 public class EmployeeController {
@@ -71,20 +72,6 @@ public class EmployeeController {
         return personEmployee;
     }
 
-//    @DeleteMapping(PATH_DELETE)
-//    public MyResponseEntity<?> deleteEmployee(@PathVariable Long id) {
-//        try{
-//            Optional<Employee> employee = employeeService.findById(id);
-//            long pers_id = (employee.get().getPers().getId());
-//            Optional<Person> person = personService.findById(pers_id);
-//            personService.deletePerson(pers_id);
-//            employeeService.deleteEmployee(id);
-//            //personService.deletePerson(pers_id);
-//            return buildSuccessMessage();
-//        }catch(ServiceException e){
-//            return buildErrorMessage(e.getMessage());
-//        }
-//    }
     @DeleteMapping(PATH_DELETE)
     public MyResponseEntity<?> deleteEmployee(@PathVariable Long id) {
         try{
