@@ -1,6 +1,7 @@
 package com.msglearning.javabackend.controllers;
 
 import com.msglearning.javabackend.entity.Employee;
+import com.msglearning.javabackend.entity.Person;
 import com.msglearning.javabackend.repositories.EmployeeRepository;
 import com.msglearning.javabackend.services.EmployeeService;
 import com.msglearning.javabackend.services.PersonService;
@@ -34,8 +35,6 @@ public class EmployeeController {
 
     @Autowired
     EmployeeService employeeService;
-    PersonService personService;
-
     @GetMapping(PATH_ALL)
     public List<Employee> getAll() {
         return employeeService.findAll();
@@ -71,17 +70,31 @@ public class EmployeeController {
         List<PersonEmployeeTO>personEmployee = employeeService.getAllEmployeesByPerson();
         return personEmployee;
     }
-    /*@DeleteMapping(PATH_DELETE)
+
+//    @DeleteMapping(PATH_DELETE)
+//    public MyResponseEntity<?> deleteEmployee(@PathVariable Long id) {
+//        try{
+//            Optional<Employee> employee = employeeService.findById(id);
+//            long pers_id = (employee.get().getPers().getId());
+//            Optional<Person> person = personService.findById(pers_id);
+//            personService.deletePerson(pers_id);
+//            employeeService.deleteEmployee(id);
+//            //personService.deletePerson(pers_id);
+//            return buildSuccessMessage();
+//        }catch(ServiceException e){
+//            return buildErrorMessage(e.getMessage());
+//        }
+//    }
+    @DeleteMapping(PATH_DELETE)
     public MyResponseEntity<?> deleteEmployee(@PathVariable Long id) {
         try{
-            personService.deletePerson(employeeService.findByPi(id));
             employeeService.deleteEmployee(id);
             return buildSuccessMessage();
-
         }catch(ServiceException e){
             return buildErrorMessage(e.getMessage());
         }
-    }*/
+    }
+
 
     @DeleteMapping(PATH_DELETE_ALL)
     public MyResponseEntity<?> deleteAllEmployees(@RequestBody List<Employee> ids) {
