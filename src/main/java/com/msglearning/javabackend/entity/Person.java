@@ -5,6 +5,17 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * Represents the personal details for the employees
+ * <ul> Fields:
+ *     <li>id - represents the primary key, is auto incremented</li>
+ *     <li>nationality - person's country of origin</li>
+ *     <li>fullName - person's full name</li>
+ *     <li>address - home address</li>
+ *     <li>email - email address</li>
+ *     <li>phone - personal phone number</li>
+ * </ul>
+ */
 @Data
 @Table(name = Person.TABLE_NAME)
 @Entity

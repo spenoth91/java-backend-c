@@ -5,6 +5,17 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * Represents employee data related to the company
+ * <ul> Fields:
+ *     <li>id - represents the primary key, is auto incremented</li>
+ *     <li>person - link to personal data</li>
+ *     <li>teamLeaderId - the id of the team leader, 0 if it's a team leader</li>
+ *     <li>isTeamLeader - tells if it's a team leader</li>
+ *     <li>department - department of working (ex: IT, HR, ...)</li>
+ *     <li>salary - how much does the employee earn</li>
+ * </ul>
+ */
 @Data
 @Table(name = Employee.TABLE_NAME)
 @Entity
