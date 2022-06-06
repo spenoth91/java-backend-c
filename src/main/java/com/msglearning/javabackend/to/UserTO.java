@@ -23,5 +23,5 @@ public class UserTO implements Serializable {
 
     private String phone;
 
-    private String role;
+    private Integer role;
 }

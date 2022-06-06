@@ -3,6 +3,7 @@ package com.msglearning.javabackend.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import java.util.List;
@@ -40,8 +41,8 @@ public class User {
     @Column
     private String profileImage;
 
-    @Column
-    private String role;
+    @Column(columnDefinition = "integer default 0")
+    private Integer role;
 
     @OneToMany(mappedBy = "owner")
     private List<Stuff> stuffList;

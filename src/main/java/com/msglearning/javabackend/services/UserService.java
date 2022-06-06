@@ -28,6 +28,7 @@ public class UserService {
         //check firstname NotNull or empty
         //check lastName NotNull or empty
         userTO.setPassword(PasswordService.getSaltedHash(userTO.getPassword()));
+        userTO.setRole(0);
         //if (validateUserTO(userTO))
             return userRepository.save(UserConverter.convertToEntity(userTO));
         //else
@@ -125,12 +126,12 @@ public class UserService {
 
     }
 
-    public Map<String, List<User>> groupByRole() {
-        List<User> allUsers = userRepository.findAll();
-
-        Map<String, List<User>> toReturn = allUsers.
-                stream().collect(Collectors.groupingBy(User::getRole));
-        return toReturn;
-    }
+//    public Map<String, List<User>> groupByRole() {
+//        List<User> allUsers = userRepository.findAll();
+//
+//        Map<String, List<User>> toReturn = allUsers.
+//                stream().collect(Collectors.groupingBy(User::getRole));
+//        return toReturn;
+//    }
 
 }
