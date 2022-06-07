@@ -4,14 +4,11 @@ import com.msglearning.javabackend.entity.Employee;
 import com.msglearning.javabackend.entity.Person;
 import com.msglearning.javabackend.repositories.EmployeeRepository;
 import com.msglearning.javabackend.repositories.PersonRepository;
-import com.msglearning.javabackend.to.PE_TO;
 import com.msglearning.javabackend.to.PersonEmployeeTO;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -75,7 +72,7 @@ public class EmployeeService {
 //        return Optional.of(employee);
 //    }
 
-    public Optional<Employee> updateData(Long id, PE_TO details) {
+    public Optional<Employee> updateData(Long id, PersonEmployeeTO details) {
         Optional<Employee> employeeOpt = employeeRepository.findById(id);
         if (employeeOpt.isEmpty())
             return Optional.empty();
@@ -90,14 +87,11 @@ public class EmployeeService {
         person.setNationality   (details.getNationality());
         person.setPhone         (details.getPhone());
 
-        personRepository.save(person);
-
         employee.setPerson (person); // set personal data
 
         employee.setDepartment  (details.getDepartment());
         employee.setSalary      (details.getSalary());
         employee.setTeamLeader  (details.getTeamLeader());
-        employee.setTeamLeaderID(details.getTeamLeaderId());
 
         employeeRepository.save(employee); // yep, save the data....
 

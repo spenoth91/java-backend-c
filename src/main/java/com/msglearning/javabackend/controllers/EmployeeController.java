@@ -1,16 +1,10 @@
 package com.msglearning.javabackend.controllers;
 
 import com.msglearning.javabackend.entity.Employee;
-import com.msglearning.javabackend.entity.Person;
-import com.msglearning.javabackend.repositories.EmployeeRepository;
 import com.msglearning.javabackend.services.EmployeeService;
-import com.msglearning.javabackend.services.PersonService;
-import com.msglearning.javabackend.services.UserService;
-import com.msglearning.javabackend.to.PE_TO;
 import com.msglearning.javabackend.to.PersonEmployeeTO;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -68,7 +62,7 @@ public class EmployeeController {
 //    }
 
     @PutMapping(PATH_UPDATE)
-    public Optional<Employee> updateData(@PathVariable Long id, @RequestBody PE_TO details) {
+    public Optional<Employee> updateData(@PathVariable Long id, @RequestBody PersonEmployeeTO details) {
         return employeeService.updateData(id, details);
     }
 
