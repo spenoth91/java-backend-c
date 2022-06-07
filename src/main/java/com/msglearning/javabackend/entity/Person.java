@@ -1,13 +1,19 @@
 package com.msglearning.javabackend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@Builder
 @Table(name = Person.TABLE_NAME)
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person {
 
     static final String TABLE_NAME = "person";

@@ -1,13 +1,19 @@
 package com.msglearning.javabackend.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@Builder
 @Table(name = Employee.TABLE_NAME)
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
 
     static final String TABLE_NAME = "employee";
@@ -17,8 +23,9 @@ public class Employee {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
+//    @JsonManagedReference
     @JoinColumn(name = "person_id")
+//    @Column(name="person_id")
     private Person person;
 
 

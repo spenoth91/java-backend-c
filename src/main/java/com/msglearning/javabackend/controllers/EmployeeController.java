@@ -47,7 +47,7 @@ public class EmployeeController {
     }
 
     @PostMapping(PATH_NEW)
-    public Employee newEmployee(@RequestBody Employee employee) {
+    public Employee newEmployee(@RequestBody PersonEmployeeTO employee) {
         return employeeService.save(employee);
     }
 

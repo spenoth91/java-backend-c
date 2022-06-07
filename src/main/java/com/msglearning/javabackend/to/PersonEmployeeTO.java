@@ -1,7 +1,5 @@
 package com.msglearning.javabackend.to;
 
-import com.msglearning.javabackend.entity.Person;
-
 public class PersonEmployeeTO {
     Long employeeID;
     String fullName;
@@ -10,8 +8,8 @@ public class PersonEmployeeTO {
     String phone;
     String nationality;
 
-    Boolean isTeamLeader;
-    String Department;
+    Boolean teamLeader;
+    String department;
     Long salary;
 
     public Long getEmployeeID() {
@@ -63,19 +61,19 @@ public class PersonEmployeeTO {
     }
 
     public Boolean getTeamLeader() {
-        return isTeamLeader;
+        return teamLeader;
     }
 
     public void setTeamLeader(Boolean teamLeader) {
-        isTeamLeader = teamLeader;
+        this.teamLeader = teamLeader;
     }
 
     public String getDepartment() {
-        return Department;
+        return department;
     }
 
     public void setDepartment(String department) {
-        Department = department;
+        this.department = department;
     }
 
     public Long getSalary() {

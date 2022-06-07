@@ -21,8 +21,8 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public Employee save(Employee employee) {
-        return employeeRepository.save(employee);
+    public Employee save(PersonEmployeeTO employee) {
+        return employeeRepository.save(convertToEmployee(employee));
     }
 
     public List<Employee> findAll() {
@@ -76,7 +76,7 @@ public class EmployeeService {
 
 
     public List<PersonEmployeeTO> getAllEmployeesByPerson(){
-        return((List<Employee>) employeeRepository
+        return( employeeRepository
                 .findAll())
                 .stream()
                 .map(this::convertToEmployeePersonTO)
@@ -99,6 +99,20 @@ public class EmployeeService {
         personEmployeeTO.setPhone(person.getPhone());
 
         return personEmployeeTO;
+    }
+    private Employee convertToEmployee(PersonEmployeeTO personEmployeeTO){
+    return Employee.builder()
+            .department(personEmployeeTO.getDepartment())
+            .isTeamLeader(personEmployeeTO.getTeamLeader())
+            .salary(personEmployeeTO.getSalary())
+            .person(Person.builder()
+                    .address(personEmployeeTO.getAddress())
+                    .email(personEmployeeTO.getEmail())
+                    .fullName(personEmployeeTO.getFullName())
+                    .nationality(personEmployeeTO.getNationality())
+                    .phone(personEmployeeTO.getPhone())
+                    .build())
+            .build();
     }
 
     /*public Long findByPi(Long id){
