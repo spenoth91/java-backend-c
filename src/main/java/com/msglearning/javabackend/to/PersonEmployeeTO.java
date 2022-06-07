@@ -1,5 +1,12 @@
 package com.msglearning.javabackend.to;
 
+
+import com.msglearning.javabackend.entity.Person;
+
+/**
+ * <p>Combination of person & employee, made into a Transfer object.</p>
+ * <p>The fields are from Employee & Person entities</p>
+ */
 public class PersonEmployeeTO {
     Long employeeID;
     String fullName;

@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
+/**
+ * <p>Transfer object for Stuff entity class.</p>
+ * <p>Has the fields from Stuff class.</p>
+ */
 @Data
 @AllArgsConstructor
 public class StuffTO implements Serializable {

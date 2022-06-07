@@ -6,6 +6,7 @@ import com.msglearning.javabackend.repositories.EmployeeRepository;
 import com.msglearning.javabackend.services.EmployeeService;
 import com.msglearning.javabackend.services.PersonService;
 import com.msglearning.javabackend.services.UserService;
+import com.msglearning.javabackend.to.PE_TO;
 import com.msglearning.javabackend.to.PersonEmployeeTO;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,9 +62,14 @@ public class EmployeeController {
         return employeeService.getByDepartment(department);
     }
 
+//    @PutMapping(PATH_UPDATE)
+//    public Optional<Employee> updateData(@PathVariable Long id, @RequestBody Employee employeeDetails) {
+//        return employeeService.updateData(id, employeeDetails);
+//    }
+
     @PutMapping(PATH_UPDATE)
-    public Optional<Employee> updateData(@PathVariable Long id, @RequestBody Employee employeeDetails) {
-        return employeeService.updateData(id, employeeDetails);
+    public Optional<Employee> updateData(@PathVariable Long id, @RequestBody PE_TO details) {
+        return employeeService.updateData(id, details);
     }
 
     @GetMapping(PATH_ALL_BY_PERSON)

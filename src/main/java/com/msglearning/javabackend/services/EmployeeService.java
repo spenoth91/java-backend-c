@@ -3,6 +3,8 @@ package com.msglearning.javabackend.services;
 import com.msglearning.javabackend.entity.Employee;
 import com.msglearning.javabackend.entity.Person;
 import com.msglearning.javabackend.repositories.EmployeeRepository;
+import com.msglearning.javabackend.repositories.PersonRepository;
+import com.msglearning.javabackend.to.PE_TO;
 import com.msglearning.javabackend.to.PersonEmployeeTO;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class EmployeeService {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    PersonRepository personRepository;
 
     public Employee save(PersonEmployeeTO employee) {
         return employeeRepository.save(convertToEmployee(employee));
@@ -53,19 +58,48 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<Employee> updateData(Long id, Employee employeeDetails) {
+//    public Optional<Employee> updateData(Long id, Employee employeeDetails) {
+//        Optional<Employee> employeeOpt = employeeRepository.findById(id);
+//        if (employeeOpt.isEmpty())
+//            return Optional.empty();
+//
+//        Employee employee = employeeOpt.get();
+//
+//        // shouldn't be able to set the employee id
+//        employee.setPerson    (employeeDetails.getPerson());
+//        employee.setDepartment  (employeeDetails.getDepartment());
+//        employee.setSalary      (employeeDetails.getSalary());
+//        employee.setTeamLeader  (employeeDetails.isTeamLeader());
+//        employee.setTeamLeaderID(employeeDetails.getTeamLeaderID());
+//
+//        return Optional.of(employee);
+//    }
+
+    public Optional<Employee> updateData(Long id, PE_TO details) {
         Optional<Employee> employeeOpt = employeeRepository.findById(id);
         if (employeeOpt.isEmpty())
             return Optional.empty();
 
         Employee employee = employeeOpt.get();
 
-        // shouldn't be able to set the employee id
-        employee.setPerson    (employeeDetails.getPerson());
-        employee.setDepartment  (employeeDetails.getDepartment());
-        employee.setSalary      (employeeDetails.getSalary());
-        employee.setTeamLeader  (employeeDetails.isTeamLeader());
-        employee.setTeamLeaderID(employeeDetails.getTeamLeaderID());
+        // change personal data
+        Person person = employee.getPerson();
+        person.setFullName      (details.getFullName());
+        person.setAddress       (details.getAddress());
+        person.setEmail         (details.getEmail());
+        person.setNationality   (details.getNationality());
+        person.setPhone         (details.getPhone());
+
+        personRepository.save(person);
+
+        employee.setPerson (person); // set personal data
+
+        employee.setDepartment  (details.getDepartment());
+        employee.setSalary      (details.getSalary());
+        employee.setTeamLeader  (details.getTeamLeader());
+        employee.setTeamLeaderID(details.getTeamLeaderId());
+
+        employeeRepository.save(employee); // yep, save the data....
 
         return Optional.of(employee);
     }
